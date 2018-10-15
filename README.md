@@ -1,7 +1,5 @@
 # clipboard-client
 
-> My superior Nuxt.js project
-
 ## Build Setup
 
 ``` bash
