@@ -18,3 +18,9 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+## Docker Commands
+```
+docker build . -t clipboard-nuxt
+docker run -p 3000:3000 -it clipboard-nuxt
+```
