@@ -1,32 +1,33 @@
 <template>
-    <section class="container">
-        <div v-if="eventsAvailable">
-            <div v-for="event in events">
-                <event-listing :event="event"></event-listing>
-            </div>
-        </div>
-        <div v-else>
-            <span>No events available, please try again later.</span>
-        </div>
-    </section>
+	<div>
+		<header>
+			<page-header></page-header>
+		</header>
+		<aside>
+			<control-column></control-column>
+		</aside>
+		<main>
+			<map-view></map-view>
+			<event-results :events="events"></event-results>
+		</main>
+	</div>
 </template>
 
 <script>
-    import axios from 'axios';
-    import EventListing from '~/components/EventListing';
+	import axios from 'axios';
+	import ControlColumn from '~/components/ControlColumn';
+	import EventListing from '~/components/EventListing';
+	import PageHeader from '~/components/PageHeader';
+	import MapView from '~/components/MapView';
+	import EventResults from '~/components/EventResults';
 
-    export default {
-        data() {
-            return {
-                events: [],
-            };
-        },
-        computed: {
-            eventsAvailable: function() {
-                return this.events.length > 0;
-            },
-        },
-        asyncData ({ params }) {
+	export default {
+		data() {
+			return{
+				events: []
+			};
+		},
+		asyncData ({ params }) {
 
             //Ensure get request goes to an endpoint that returns an array or json object
             //If a regular HTML page is returned, the v-for in the view above will try to
@@ -38,26 +39,36 @@
                     return { events: res.data }
                 })*/
 
-            //Hardcoded test data until JSON api is available
-            return {
-                events: [
-                    {
-                        id: '123',
-                        title: 'test',
-                        start_date: 'test',
-                        description: 'test',
-                    },
-                    {
-                        id: '124',
-                        title: 'test2',
-                        start_date: 'test2',
-                        description: 'test2',
-                    },
-                ],
-            };
-        },
-        components: {
-            EventListing,
-        },
-    };
+			//Hardcoded test data until JSON api is linked
+			return {
+				events: [
+					{
+						id: '123',
+						title: 'Duis autem vel eum iriure dolor',
+						start_date: 'test',
+						description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
+					},
+					{
+						id: '124',
+						title: 'Ut wisi enim ad minim veniam, quis nostrud',
+						start_date: 'test2',
+						description: 'Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.',
+					},
+					{
+						id: '125',
+						title: 'Sed diam nonummy nibh euismod tincidunt ut laoreet dolore',
+						start_date: 'test2',
+						description: 'Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum.',
+					}
+				]
+			};
+		},
+		components: {
+			ControlColumn,
+			EventListing,
+			PageHeader,
+			MapView,
+			EventResults
+		}
+	};
 </script>
